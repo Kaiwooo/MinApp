@@ -1,9 +1,10 @@
+import logging
+import httpx
 from fastapi import APIRouter
 from aiogram import Bot, Dispatcher, types
+
 from application.config import BOT_TOKEN
 from application.storage import BITRIX_AUTH
-import httpx
-import logging
 
 logging.basicConfig(level=logging.INFO)
 
@@ -12,45 +13,79 @@ dp = Dispatcher(bot=bot)
 
 telegram_router = APIRouter()
 
+
+# ===============================
+# Telegram webhook endpoint
+# ===============================
 @telegram_router.post("/telegram/webhook")
 async def telegram_webhook(update: dict):
     await dp.feed_raw_update(bot, update)
     return {"ok": True}
 
 
-async def get_telegram_openline_id(auth: dict):
-    """Получаем ID open line для Telegram-коннектора"""
-    url = auth["client_endpoint"] + "imconnector.list"
+# ===============================
+# Получаем Telegram Open Line ID
+# ===============================
+async def get_telegram_openline_id(auth: dict) -> int | None:
+    url = auth["client_endpoint"] + "imopenlines.config.list"
 
     async with httpx.AsyncClient() as client:
-        resp = await client.get(url, params={"auth": auth["access_token"]})
-        data = resp.json()
+        resp = await client.get(
+            url,
+            params={"auth": auth["access_token"]},
+            timeout=10
+        )
 
-    # Находим Telegram-коннектор
-    for connector in data.get("result", {}).values():  # <- исправлено
-        if connector.get("CODE") == "telegrambot":
-            logging.info(f"Найдена Telegram open line: {connector.get('ID')}")
-            return connector.get("ID")
+    data = resp.json()
+    logging.info("OPENLINES RESPONSE:")
+    logging.info(data)
 
-    logging.warning("Telegram-коннектор не найден")
+    result = data.get("result", {})
+
+    for line_id, line in result.items():
+        connectors = line.get("CONNECTORS", {})
+        if "telegrambot" in connectors:
+            logging.info(f"Найдена Telegram Open Line: {line_id}")
+            return int(line_id)
+
+    logging.warning("Telegram Open Line не найдена")
     return None
 
 
-async def send_message_to_openline(auth: dict, openline_id: str, message: str):
-    """Отправляем сообщение в open line"""
+# ===============================
+# Отправка сообщения в Open Line
+# ===============================
+async def send_message_to_openline(
+    auth: dict,
+    openline_id: int,
+    message: types.Message
+):
     url = auth["client_endpoint"] + "imopenlines.message.add"
 
     payload = {
-        "CHAT_ID": openline_id,
-        "MESSAGE": message
+        "LINE_ID": openline_id,
+        "MESSAGE": message.text,
+        "USER_ID": f"telegram_{message.from_user.id}",
+        "SOURCE": "telegram",
+        "SOURCE_ID": str(message.from_user.id),
+        "AUTHOR_ID": 0
     }
 
     async with httpx.AsyncClient() as client:
-        resp = await client.post(url, params={"auth": auth["access_token"]}, json=payload)
-        logging.info(f"Ответ Bitrix: {resp.text}")
+        resp = await client.post(
+            url,
+            params={"auth": auth["access_token"]},
+            json=payload,
+            timeout=10
+        )
+
+    logging.info("SEND MESSAGE RESPONSE:")
+    logging.info(resp.text)
 
 
-# Обработчик сообщений из Telegram
+# ===============================
+# Telegram message handler
+# ===============================
 @dp.message()
 async def handle_message(message: types.Message):
     auth = next(iter(BITRIX_AUTH.values()), None)
@@ -59,12 +94,12 @@ async def handle_message(message: types.Message):
         await message.answer("❌ Bitrix не подключён")
         return
 
-    # Получаем ID Telegram open line
     openline_id = await get_telegram_openline_id(auth)
+
     if not openline_id:
-        await message.answer("❌ Telegram open line не найдена")
+        await message.answer("❌ Telegram Open Line не найдена в Bitrix")
         return
 
-    # Отправляем сообщение
-    await send_message_to_openline(auth, openline_id, message.text)
-    await message.answer("✅ Отправлено в Bitrix open line")
+    await send_message_to_openline(auth, openline_id, message)
+
+    await message.answer("✅ Сообщение отправлено в открытую линию Bitrix")
