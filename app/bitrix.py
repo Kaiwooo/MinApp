@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Request
 import logging
-import json
 from urllib.parse import parse_qs
 from app.storage import BITRIX_AUTH
 

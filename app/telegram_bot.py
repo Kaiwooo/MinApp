@@ -4,7 +4,7 @@ from app.storage import BITRIX_AUTH
 import httpx
 
 bot = Bot(BOT_TOKEN)
-dp = Dispatcher()
+dp = Dispatcher(bot=bot)
 
 @dp.message()
 async def handle_message(message: types.Message):

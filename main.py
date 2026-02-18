@@ -1,6 +1,6 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, APIRouter
 from app.bitrix import bitrix_router
-from app.telegram_bot import telegram_router
+from app.telegram_bot import dp, bot
 
 app = FastAPI()
 
