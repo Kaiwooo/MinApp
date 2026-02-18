@@ -1,3 +1,4 @@
+from fastapi import APIRouter
 from aiogram import Bot, Dispatcher, types
 from app.config import BOT_TOKEN
 from app.storage import BITRIX_AUTH
@@ -6,6 +7,14 @@ import httpx
 bot = Bot(BOT_TOKEN)
 dp = Dispatcher(bot=bot)
 
+telegram_router = APIRouter()
+
+@telegram_router.post("/telegram/webhook")
+async def telegram_webhook(update: dict):
+    await dp.feed_raw_update(bot, update)
+    return {"ok": True}
+
+# Обработчик сообщений
 @dp.message()
 async def handle_message(message: types.Message):
     auth = next(iter(BITRIX_AUTH.values()), None)
