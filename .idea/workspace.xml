@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="2">
-      <change beforePath="$PROJECT_DIR$/application/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771451187874</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="2">
+      <option name="closed" value="true" />
+      <created>1771452204271</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771452204271</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
