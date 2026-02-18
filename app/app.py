@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 import logging
 import json
+from storage import BITRIX_AUTH
 
 logging.basicConfig(level=logging.INFO)
 
@@ -36,5 +37,8 @@ async def install(request: Request):
     auth = data.get("auth")
     logging.info("AUTH:")
     logging.info(auth)
+
+    if auth:
+        BITRIX_AUTH["default"] = auth
 
     return {"status": "ok"}
