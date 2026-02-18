@@ -1,7 +1,4 @@
 from fastapi import APIRouter, Request
-import logging
-from urllib.parse import parse_qs
-from app.storage import BITRIX_AUTH
 
 bitrix_router = APIRouter()
 

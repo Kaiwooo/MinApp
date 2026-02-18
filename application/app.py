@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 import logging, json
-from app.storage import BITRIX_AUTH
+from application.storage import BITRIX_AUTH
 
 logging.basicConfig(level=logging.INFO)
 

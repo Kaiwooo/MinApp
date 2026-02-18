@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from aiogram import Bot, Dispatcher, types
-from app.config import BOT_TOKEN
-from app.storage import BITRIX_AUTH
+from application.config import BOT_TOKEN
+from application.storage import BITRIX_AUTH
 import httpx
 
 bot = Bot(BOT_TOKEN)
