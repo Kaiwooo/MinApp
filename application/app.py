@@ -12,7 +12,7 @@ bitrix_app_router = APIRouter()
 
 async def finish_install(auth: dict):
     """
-    Обязательный шаг Bitrix24 — завершение установки приложения
+    Завершение установки приложения Bitrix24
     https://apidocs.bitrix24.ru/settings/app-installation/installation-finish.html
     """
     url = auth["server_endpoint"] + "app.install.finish"
@@ -30,7 +30,7 @@ async def finish_install(auth: dict):
 
 @bitrix_app_router.post("/install")
 async def install(request: Request):
-    # Сырое тело (для отладки)
+    # Получаем тело запроса
     raw_body = await request.body()
     logging.info("RAW BODY:")
     logging.info(raw_body.decode("utf-8", errors="ignore"))
@@ -48,7 +48,7 @@ async def install(request: Request):
     logging.info("PARSED DATA:")
     logging.info(json.dumps(data, indent=2, ensure_ascii=False))
 
-    # Собираем auth из auth[...]
+    # Сбор auth
     auth = {}
     for k, v in data.items():
         if k.startswith("auth[") and k.endswith("]"):
@@ -58,11 +58,8 @@ async def install(request: Request):
     logging.info(auth)
 
     if auth:
-        # Сохраняем auth, чтобы Telegram-бот мог использовать
         BITRIX_AUTH["default"] = auth
         logging.info("✅ Auth сохранён в BITRIX_AUTH")
-
-        # 🔥 КРИТИЧЕСКИ ВАЖНО: завершаем установку приложения
         await finish_install(auth)
 
     return {"status": "ok"}
