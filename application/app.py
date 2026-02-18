@@ -1,32 +1,23 @@
-from fastapi import FastAPI, Request
-import logging
-import json
-from storage import BITRIX_AUTH
+from fastapi import APIRouter, Request
+import logging, json
+from app.storage import BITRIX_AUTH
 
 logging.basicConfig(level=logging.INFO)
 
-app = FastAPI()
+bitrix_app_router = APIRouter()
 
-@app.get("/")
-async def root():
-    return {"status": "alive"}
-
-@app.post("/install")
+@bitrix_app_router.post("/install")
 async def install(request: Request):
     raw_body = await request.body()
-
     logging.info("RAW BODY:")
     logging.info(raw_body.decode("utf-8", errors="ignore"))
 
     data = None
-
-    # пробуем JSON
     try:
         data = await request.json()
     except Exception:
         pass
 
-    # если не JSON — читаем form-data
     if data is None:
         form = await request.form()
         data = dict(form)
