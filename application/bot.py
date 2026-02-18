@@ -27,7 +27,7 @@ async def get_telegram_openline_id(auth: dict):
         data = resp.json()
 
     # Находим Telegram-коннектор
-    for connector in data.get("result", []):
+    for connector in data.get("result", {}).values():  # <- исправлено
         if connector.get("CODE") == "telegrambot":
             logging.info(f"Найдена Telegram open line: {connector.get('ID')}")
             return connector.get("ID")
