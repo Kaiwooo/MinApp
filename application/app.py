@@ -1,68 +1,68 @@
-from fastapi import APIRouter, Request
 import logging
-import json
 import httpx
+from fastapi import APIRouter
+from aiogram import Bot, Dispatcher, types
 
+from application.config import BOT_TOKEN
 from application.storage import BITRIX_AUTH
 
 logging.basicConfig(level=logging.INFO)
 
-bitrix_app_router = APIRouter()
+bot = Bot(BOT_TOKEN)
+dp = Dispatcher(bot=bot)
+
+telegram_router = APIRouter()
+
+# ===============================
+# Telegram webhook endpoint
+# ===============================
+@telegram_router.post("/telegram/webhook")
+async def telegram_webhook(update: dict):
+    await dp.feed_raw_update(bot, update)
+    return {"ok": True}
 
 
-async def finish_install(auth: dict):
-    """
-    Обязательный шаг Bitrix24 — завершение установки приложения
-    https://apidocs.bitrix24.ru/settings/app-installation/installation-finish.html
-    """
-    url = auth["server_endpoint"] + "app.install.finish"
+# ===============================
+# Отправка сообщения в Open Line
+# ===============================
+async def send_message_to_openline(
+    auth: dict,
+    message: types.Message,
+    openline_id: int = 2,  # фиксированный ID открытой линии
+):
+    url = auth["client_endpoint"] + "imopenlines.message.add.json"
+
+    payload = {
+        "LINE_ID": openline_id,
+        "MESSAGE": message.text,
+        "USER_ID": f"telegram_{message.from_user.id}",
+        "SOURCE": "telegram",
+        "SOURCE_ID": str(message.from_user.id),
+        "AUTHOR_ID": 0
+    }
 
     async with httpx.AsyncClient() as client:
         resp = await client.post(
             url,
             params={"auth": auth["access_token"]},
+            json=payload,
             timeout=10
         )
 
-    logging.info("INSTALL FINISH RESPONSE:")
+    logging.info("SEND MESSAGE RESPONSE:")
     logging.info(resp.text)
 
 
-@bitrix_app_router.post("/install")
-async def install(request: Request):
-    # Сырое тело (для отладки)
-    raw_body = await request.body()
-    logging.info("RAW BODY:")
-    logging.info(raw_body.decode("utf-8", errors="ignore"))
+# ===============================
+# Telegram message handler
+# ===============================
+@dp.message()
+async def handle_message(message: types.Message):
+    auth = next(iter(BITRIX_AUTH.values()), None)
 
-    data = None
-    try:
-        data = await request.json()
-    except Exception:
-        pass
+    if not auth:
+        await message.answer("❌ Bitrix не подключён")
+        return
 
-    if data is None:
-        form = await request.form()
-        data = dict(form)
-
-    logging.info("PARSED DATA:")
-    logging.info(json.dumps(data, indent=2, ensure_ascii=False))
-
-    # Собираем auth из auth[...]
-    auth = {}
-    for k, v in data.items():
-        if k.startswith("auth[") and k.endswith("]"):
-            auth[k[5:-1]] = v
-
-    logging.info("AUTH:")
-    logging.info(auth)
-
-    if auth:
-        # Сохраняем auth, чтобы Telegram-бот мог использовать
-        BITRIX_AUTH["default"] = auth
-        logging.info("✅ Auth сохранён в BITRIX_AUTH")
-
-        # 🔥 КРИТИЧЕСКИ ВАЖНО: завершаем установку приложения
-        await finish_install(auth)
-
-    return {"status": "ok"}
+    await send_message_to_openline(auth, message)
+    await message.answer("✅ Сообщение отправлено в открытую линию Bitrix")
