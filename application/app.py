@@ -11,11 +11,7 @@ bitrix_app_router = APIRouter()
 
 
 async def finish_install(auth: dict):
-    """
-    Завершение установки приложения Bitrix24
-    https://apidocs.bitrix24.ru/settings/app-installation/installation-finish.html
-    """
-    url = auth["server_endpoint"] + "app.install.finish"
+    url = auth["client_endpoint"] + "app.install.finish"
 
     async with httpx.AsyncClient() as client:
         resp = await client.post(
