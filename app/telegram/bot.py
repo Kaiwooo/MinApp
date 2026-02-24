@@ -5,7 +5,7 @@ import logging
 import json
 
 from app.config import BOT_TOKEN
-from app.bitrix.connectors import list_connectors, connector_status, activate_connector
+from app.bitrix.connectors import list_connectors, connector_status, activate_connector, deactivate_connector
 from app.bitrix.openlines import list_openlines
 
 bot = Bot(token=BOT_TOKEN)
@@ -39,6 +39,13 @@ async def handle_message(message: Message):
         logging.info(f"Ответ Bitrix: {result}")
         await message.answer(f"Коннектор '{connector_code}' активирован:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
 
+    elif text.startswith("deactivate connector "):
+        connector_code = text.replace("deactivate connector ", "").strip()
+        logging.info(f"Запрос деактивации коннектора: {connector_code} от {message.from_user.id}")
+        result = await deactivate_connector(connector_code)
+        logging.info(f"Ответ Bitrix: {result}")
+        await message.answer(f"Коннектор '{connector_code}' активирован:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
+
     elif text == "openlines":
         logging.info(f"Запрос списка openlines от Telegram: {message.from_user.id}")
         openlines = await list_openlines()
@@ -51,5 +58,6 @@ async def handle_message(message: Message):
             "— 'get connectors' — список коннекторов;\n"
             "— 'connector status {название}' — статус коннектора;\n"
             "— 'activate connector {название}' — активировать коннектор;\n"
+            "— 'deactivate connector {название}' — деактивировать коннектор;\n"
             "— 'openlines' — список открытых линий."
         )
