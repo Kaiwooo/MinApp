@@ -32,8 +32,4 @@ async def install(request: Request):
         BITRIX_AUTH["default"] = auth
         logging.info("✅ OAuth сохранён")
 
-        connectors = await list_connectors()
-        logging.info("CONNECTORS:")
-        logging.info(json.dumps(connectors, indent=2, ensure_ascii=False))
-
     return {"status": "ok"}
