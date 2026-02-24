@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 python-multipart
-aiogram
+aiogram==3.25
 httpx
