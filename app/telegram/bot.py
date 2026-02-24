@@ -6,6 +6,7 @@ import json
 
 from app.config import BOT_TOKEN
 from app.bitrix.connectors import list_connectors, connector_status
+from app.bitrix.openlines import list_openlines
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -31,5 +32,16 @@ async def handle_message(message: Message):
         logging.info(f"Ответ Bitrix: {status}")
         await message.answer(f"Статус коннектора '{connector_code}':\n{json.dumps(status, indent=2, ensure_ascii=False)}")
 
+    elif text == "openlines":
+        logging.info(f"Запрос списка openlines от Telegram: {message.from_user.id}")
+        openlines = await list_openlines()
+        logging.info(f"Ответ Bitrix openlines: {openlines}")
+        await message.answer(f"Openlines:\n{json.dumps(openlines, indent=2, ensure_ascii=False)}")
+
     else:
-        await message.answer("Напиши 'get connectors', чтобы получить список коннекторов или 'connector status {название}', чтобы проверить состояние коннектора")
+        await message.answer(
+            "Напиши:\n"
+            "— 'get connectors' — список коннекторов;\n"
+            "— 'connector status {название}' — статус коннектора;\n"
+            "— 'openlines' — список открытых линий."
+        )
