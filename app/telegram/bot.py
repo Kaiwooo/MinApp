@@ -50,5 +50,6 @@ async def handle_message(message: Message):
             "Напиши:\n"
             "— 'get connectors' — список коннекторов;\n"
             "— 'connector status {название}' — статус коннектора;\n"
+            "— 'activate connector {название}' — активировать коннектор;\n"
             "— 'openlines' — список открытых линий."
         )

@@ -12,11 +12,13 @@ async def register_connector(code: str):
     )
 
 
-async def activate_connector(code: str):
-    return await call(
-        "imconnector.activate",
-        {"CONNECTOR": code}
-    )
+async def activate_connector(connector_code: str, line_id: int, active: int = 1):
+    payload = {
+        "CONNECTOR": connector_code,
+        "LINE": line_id,
+        "ACTIVE": active
+    }
+    return await call("imconnector.activate", payload)
 
 
 async def connector_status(code: str):
