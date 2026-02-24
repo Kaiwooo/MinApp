@@ -32,19 +32,46 @@ async def handle_message(message: Message):
         logging.info(f"Ответ Bitrix: {status}")
         await message.answer(f"Статус коннектора '{connector_code}':\n{json.dumps(status, indent=2, ensure_ascii=False)}")
 
+
     elif text.startswith("activate connector "):
-        connector_code = text.replace("activate connector ", "").strip()
-        logging.info(f"Запрос активации коннектора: {connector_code} от {message.from_user.id}")
-        result = await activate_connector(connector_code)
+        parts = text.split()
+        if len(parts) < 4:
+            await message.answer(
+                "Использование:\nactivate connector {код} {LINE_ID}"
+            )
+            return
+        connector_code = parts[2]
+        try:
+            line_id = int(parts[3])
+        except ValueError:
+            await message.answer("LINE_ID должен быть числом")
+            return
+        logging.info(f"Запрос активации коннектора: {connector_code} LINE={line_id} от {message.from_user.id}")
+        result = await activate_connector(connector_code=connector_code, line_id=line_id, active=1)
         logging.info(f"Ответ Bitrix: {result}")
-        await message.answer(f"Коннектор '{connector_code}' активирован:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
+        await message.answer(f"Результат активации:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
 
     elif text.startswith("deactivate connector "):
-        connector_code = text.replace("deactivate connector ", "").strip()
-        logging.info(f"Запрос деактивации коннектора: {connector_code} от {message.from_user.id}")
-        result = await deactivate_connector(connector_code)
+        parts = text.split()
+        if len(parts) < 4:
+            await message.answer(
+                "Использование:\ndeactivate connector {код} {LINE_ID}"
+            )
+            return
+        connector_code = parts[2]
+        try:
+            line_id = int(parts[3])
+        except ValueError:
+            await message.answer("LINE_ID должен быть числом")
+            return
+        logging.info(
+            f"Запрос деактивации коннектора: {connector_code} LINE={line_id} от {message.from_user.id}"
+        )
+        result = await deactivate_connector(connector_code=connector_code, line_id=line_id, active=0)
         logging.info(f"Ответ Bitrix: {result}")
-        await message.answer(f"Коннектор '{connector_code}' активирован:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
+        await message.answer(
+            f"Коннектор '{connector_code}' деактивирован для линии {line_id}:\n"
+            f"{json.dumps(result, indent=2, ensure_ascii=False)}")
 
     elif text == "openlines":
         logging.info(f"Запрос списка openlines от Telegram: {message.from_user.id}")
