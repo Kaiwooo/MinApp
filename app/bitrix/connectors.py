@@ -16,7 +16,7 @@ async def activate_connector(connector_code: str, line_id: int, active: int = 1)
     payload = {
         "CONNECTOR": connector_code,
         "LINE": line_id,
-        "ACTIVE": active
+        "ACTIVE": 1
     }
     return await call("imconnector.activate", payload)
 
