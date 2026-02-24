@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="2">
-      <change beforePath="$PROJECT_DIR$/application/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/app.py" afterDir="false" />
+    <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="3">
+      <change afterPath="$PROJECT_DIR$/app/telegram/telegram_webhook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bitrix/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bitrix/oauth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/oauth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/telegram/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/telegram/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,25 +51,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/p.gerasimenko/PycharmProjects/MinApp/app&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/p.gerasimenko/PycharmProjects/MinApp",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp" />
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp" />
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\application" />
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\bitrix" />
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\telegram" />
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app" />
     </key>
   </component>
@@ -275,12 +285,29 @@
       <option name="project" value="LOCAL" />
       <updated>1771516486231</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="2">
+      <option name="closed" value="true" />
+      <created>1771517921207</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1771517921207</updated>
+    </task>
+    <task id="LOCAL-00026" summary="3">
+      <option name="closed" value="true" />
+      <created>1771955496173</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1771955496174</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="2" />
-    <option name="LAST_COMMIT_MESSAGE" value="2" />
+    <MESSAGE value="3" />
+    <option name="LAST_COMMIT_MESSAGE" value="3" />
   </component>
 </project>

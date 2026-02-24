@@ -1,11 +1,7 @@
 import httpx
-import logging
 
 from app.storage import BITRIX_AUTH
 from app.bitrix.oauth import refresh_token
-
-logging.basicConfig(level=logging.INFO)
-
 
 async def call(method: str, payload: dict | None = None):
     auth = BITRIX_AUTH.get("default")
