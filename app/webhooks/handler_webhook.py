@@ -1,15 +1,13 @@
-from fastapi import FastAPI, Request
+from fastapi import APIRouter, Request
 import logging
 
-app = FastAPI()
+router = APIRouter()
 
-
-@app.post("/bitrix/webhook")
+@router.post("/bitrix/webhook")
 async def bitrix_webhook(request: Request):
     data = await request.json()
 
     logging.info("Получен webhook от Bitrix")
     logging.info(data)
 
-    # Здесь позже будем обрабатывать события
     return {"status": "ok"}

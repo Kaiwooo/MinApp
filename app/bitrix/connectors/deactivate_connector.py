@@ -1,9 +1,9 @@
 from app.bitrix.client import call
 
-async def deactivate_connector(connector_code: str, line_id: int, active: int = 1):
+async def deactivate_connector(connector_code: str, line_id: int):
     payload = {
         "CONNECTOR": connector_code,
         "LINE": line_id,
-        "ACTIVE": active
+        "ACTIVE": 0
     }
     return await call("imconnector.activate", payload)

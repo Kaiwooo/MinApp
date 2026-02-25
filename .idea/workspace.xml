@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="3">
-      <change afterPath="$PROJECT_DIR$/app/bitrix/connectors/activate_connector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bitrix/connectors/create_connector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bitrix/connectors/deactivate_connector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bitrix/connectors/list_connectors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/bitrix/connectors/status_connector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/webhooks/handler_webhook.py" afterDir="false" />
+    <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/install.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/webhooks/install_webhook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bitrix/connectors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bitrix/openlines.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/openlines/openlines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bitrix/connectors/activate_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/connectors/activate_connector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bitrix/connectors/deactivate_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/connectors/deactivate_connector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/telegram/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/telegram/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/telegram/telegram_webhook.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/webhooks/telegram_webhook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/webhooks/handler_webhook.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/webhooks/handler_webhook.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,11 +71,11 @@
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app\bitrix\openlines" />
+      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app\webhooks" />
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp" />
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\application" />
       <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\bitrix" />
-      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\telegram" />
-      <recent name="C:\Users\p.gerasimenko\PycharmProjects\MinApp\app" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -485,13 +477,22 @@
       <option name="project" value="LOCAL" />
       <updated>1771984299624</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="4">
+      <option name="closed" value="true" />
+      <created>1772018840510</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1772018840510</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="2" />
     <MESSAGE value="3" />
-    <option name="LAST_COMMIT_MESSAGE" value="3" />
+    <MESSAGE value="4" />
+    <option name="LAST_COMMIT_MESSAGE" value="4" />
   </component>
 </project>

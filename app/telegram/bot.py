@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, Router
 from aiogram.types import Message
 import json
 from app.config import BOT_TOKEN
-from app.bitrix.connectors import list_connectors, activate_connector, deactivate_connector
+from app.bitrix.connectors import list_connectors, activate_connector, deactivate_connector, status_connector, create_connector
 from app.bitrix.openlines.openlines import list_openlines
 
 bot = Bot(token=BOT_TOKEN)
@@ -22,7 +22,7 @@ async def handle_message(message: Message):
     elif text.startswith("connector status "):
         # Извлекаем название коннектора
         connector_code = text.replace("connector status ", "").strip()
-        status = await connector_status(connector_code)
+        status = await status_connector(connector_code)
         await message.answer(f"Статус коннектора '{connector_code}':\n{json.dumps(status, indent=2, ensure_ascii=False)}")
 
 
