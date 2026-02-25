@@ -1,11 +1,9 @@
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, Router
 from aiogram.types import Message
-from aiogram import Router
 import json
-
 from app.config import BOT_TOKEN
-from app.bitrix.connectors import list_connectors, connector_status, activate_connector, deactivate_connector
-from app.bitrix.openlines import list_openlines
+from app.bitrix.connectors import list_connectors, activate_connector, deactivate_connector
+from app.bitrix.openlines.openlines import list_openlines
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()

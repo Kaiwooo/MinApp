@@ -5,7 +5,6 @@ from app.telegram.bot import dp, bot
 
 router = APIRouter()
 
-
 @router.post("/telegram/webhook")
 async def telegram_webhook(request: Request):
     data = await request.json()

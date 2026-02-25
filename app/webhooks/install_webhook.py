@@ -1,19 +1,15 @@
-from fastapi import APIRouter, Request
 import logging
-import json
-from urllib.parse import unquote_plus
+from fastapi import APIRouter, Request
 from app.storage import BITRIX_AUTH
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 router = APIRouter()
 
-
 @router.post("/install")
 async def install(request: Request):
     raw = await request.body()
-    logging.info("RAW INSTALL:")
-    logging.info(raw.decode(errors="ignore"))
+    logging.info(f"RAW INSTALL: {raw.decode(errors='ignore')}")
 
     data = None
     try:
@@ -29,7 +25,6 @@ async def install(request: Request):
 
     if auth:
         BITRIX_AUTH["default"] = auth
-        decoded_auth = {k: unquote_plus(v) if isinstance(v, str) else v for k, v in auth.items()}
-        logging.info("✅ OAuth сохранён:\n" + json.dumps(decoded_auth, indent=2, ensure_ascii=False))
+        logging.info("✅ OAuth сохранён:")
 
     return {"status": "ok"}
