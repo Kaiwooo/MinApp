@@ -7,8 +7,6 @@
     <list default="true" id="984e3436-2926-4bb6-b59e-3e6aa08ef600" name="Changes" comment="3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/install.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/install.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bitrix/connectors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/bitrix/connectors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/telegram/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/telegram/bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -451,7 +449,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771980277128</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="3">
+      <option name="closed" value="true" />
+      <created>1771981657315</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1771981657315</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

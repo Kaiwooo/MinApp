@@ -28,5 +28,6 @@ async def install(request: Request):
     if auth:
         BITRIX_AUTH["default"] = auth
         logging.info("✅ OAuth сохранён")
+        logging.info(auth)
 
     return {"status": "ok"}
