@@ -73,6 +73,23 @@ async def handle_message(message: Message):
         else:
             await message.answer("Нет открытых линий")
 
+    elif text.startswith("new connector "):
+        parts = message.text.split(maxsplit=3)
+
+        if len(parts) < 4:
+            await message.answer(
+                "Использование:\nnew connector {id} {name}"
+            )
+            return
+
+        connector_id = parts[2]
+        name = parts[3]
+        result = await create_connector(connector_id, name)
+        await message.answer(
+            f"Создание коннектора:\n"
+            f"{json.dumps(result, indent=2, ensure_ascii=False)}"
+        )
+
     else:
         await message.answer(
             "Напиши:\n"
