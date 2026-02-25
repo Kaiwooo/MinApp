@@ -76,8 +76,15 @@ async def handle_message(message: Message):
     elif text == "openlines":
         logging.info(f"Запрос списка openlines от Telegram: {message.from_user.id}")
         openlines = await list_openlines()
-        logging.info(f"Ответ Bitrix openlines: {openlines}")
-        await message.answer(f"Openlines:\n{json.dumps(openlines, indent=2, ensure_ascii=False)}")
+        if openlines and "result" in openlines:
+            # Сокращаем вывод до ключевых полей
+            simplified = [
+                {k: v for k, v in line.items() if k in ["ID", "LINE_NAME", "ACTIVE"]}
+                for line in openlines["result"]
+            ]
+            await message.answer(f"Openlines:\n{json.dumps(simplified, indent=2, ensure_ascii=False)}")
+        else:
+            await message.answer("Нет открытых линий")
 
     else:
         await message.answer(
