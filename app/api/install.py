@@ -1,9 +1,6 @@
 from fastapi import APIRouter, Request
 import logging
-import json
-
 from app.storage import BITRIX_AUTH
-from app.bitrix.connectors import list_connectors
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 

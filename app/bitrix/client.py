@@ -1,5 +1,6 @@
 import httpx
 import logging
+import json
 
 from app.storage import BITRIX_AUTH
 from app.bitrix.oauth import refresh_token
@@ -22,7 +23,7 @@ async def call(method: str, payload: dict | None = None):
         )
 
     data = resp.json()
-    logging.info(f"[BITRIX] {method} → {data}")
+    logging.info(f"[BITRIX] {method} →\n{json.dumps(data, indent=2, ensure_ascii=False)}")
 
     if data.get("error") == "expired_token":
         logging.info("Token expired. Refreshing...")
