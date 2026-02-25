@@ -73,7 +73,7 @@ async def handle_message(message: Message):
         else:
             await message.answer("Нет открытых линий")
 
-    elif text.startswith("new connector "):
+    elif text.startswith("create connector "):
         parts = message.text.split(maxsplit=3)
 
         if len(parts) < 4:
@@ -97,5 +97,6 @@ async def handle_message(message: Message):
             "— 'connector status {название}' — статус коннектора;\n"
             "— 'activate connector {название}' — активировать коннектор;\n"
             "— 'deactivate connector {название}' — деактивировать коннектор;\n"
+            "— 'create connector {id} {название}' — деактивировать коннектор;\n"
             "— 'openlines' — список открытых линий."
         )
