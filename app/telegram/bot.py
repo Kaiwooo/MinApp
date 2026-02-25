@@ -39,7 +39,7 @@ async def handle_message(message: Message):
         except ValueError:
             await message.answer("LINE_ID должен быть числом")
             return
-        result = await activate_connector(connector_code=connector_code, line_id=line_id, active=1)
+        result = await activate_connector(connector_code=connector_code, line_id=line_id)
         await message.answer(f"Результат активации:\n{json.dumps(result, indent=2, ensure_ascii=False)}")
 
     elif text.startswith("deactivate connector "):
@@ -56,7 +56,7 @@ async def handle_message(message: Message):
             await message.answer("LINE_ID должен быть числом")
             return
 
-        result = await deactivate_connector(connector_code=connector_code, line_id=line_id, active=0)
+        result = await deactivate_connector(connector_code=connector_code, line_id=line_id)
         await message.answer(
             f"Коннектор '{connector_code}' деактивирован для линии {line_id}:\n"
             f"{json.dumps(result, indent=2, ensure_ascii=False)}")

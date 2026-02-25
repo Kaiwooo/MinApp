@@ -22,7 +22,7 @@ async def bind_connector_widget(name: str):
     return await call("placement.bind", payload)
 
 
-async def create_new_connector(connector_id: str, name: str):
+async def create_connector(connector_id: str, name: str):
     register_result = await register_connector(connector_id, name)
     bind_result = await bind_connector_widget(name)
 
