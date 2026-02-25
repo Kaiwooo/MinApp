@@ -5,7 +5,7 @@ ICON_SVG = "data:image/svg+xml;charset=US-ASCII,%3Csvg%20version%3D..."
 
 async def register_connector(connector_id: str, name: str):
     payload = {
-        "CONNECTOR": connector_id,
+        "ID": connector_id,
         "NAME": name,
         "ICON": ICON_SVG,
         "HANDLER": WEBHOOK_HANDLER
@@ -24,8 +24,10 @@ async def bind_connector_widget(name: str):
 
 async def create_connector(connector_id: str, name: str):
     register_result = await register_connector(connector_id, name)
-    bind_result = await bind_connector_widget(name)
+    if not register_result or register_result.get("error"):
+        return {"register": register_result}
 
+    bind_result = await bind_connector_widget(name)
     return {
         "register": register_result,
         "placement": bind_result
