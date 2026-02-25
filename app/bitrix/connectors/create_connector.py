@@ -15,6 +15,7 @@ async def register_connector(connector_id: str, name: str):
         },
         "HANDLER": WEBHOOK_HANDLER
     }
+    return await call("imconnector.register", payload)
 
 
 async def bind_connector_widget(name: str):
