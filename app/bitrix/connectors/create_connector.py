@@ -7,10 +7,14 @@ async def register_connector(connector_id: str, name: str):
     payload = {
         "ID": connector_id,
         "NAME": name,
-        "ICON": ICON_SVG,
+        "ICON": {
+            "DATA_IMAGE": ICON_SVG,
+            "COLOR": "#1900ff",
+            "SIZE": "90%",
+            "POSITION": "center"
+        },
         "HANDLER": WEBHOOK_HANDLER
     }
-    return await call("imconnector.register", payload)
 
 
 async def bind_connector_widget(name: str):
